@@ -1,17 +1,14 @@
 use std::io;
-use std::collections::HashMap;
 
 fn final_value_after_operations(operations: Vec<String>) -> i32 {
     let mut resul: i32 = 0;
-    let map: HashMap<&str, i32> = HashMap::from([
-        ("X++", 1),
-        ("++X", 1),
-        ("X--", -1),
-        ("--X", -1)
-    ]);
 
     for i in &operations{
-        resul += map.get(i.as_str()).unwrap();
+        resul += match i.as_bytes()[1] {
+            b'+' => 1, 
+            b'-' => -1,
+            _ => 0
+        };
     }
 
     resul
